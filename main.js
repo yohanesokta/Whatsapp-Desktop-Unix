@@ -13,9 +13,9 @@ function createWindow() {
       contextIsolation: true,
       webviewTag: true, 
     },
-    icon: path.join(__dirname, 'icon.png') 
+    icon: path.join(__dirname, 'assets','icon.png') 
   });
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile('./static/index.html');
 }
 app.whenReady().then(createWindow);
 

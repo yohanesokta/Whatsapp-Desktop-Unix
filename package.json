@@ -1,15 +1,48 @@
 {
-  "name": "WhatsApp Desktop Unix",
+  "name": "WhatsApp_Desktop_Unix",
   "version": "1.0.0",
   "description": "Multi-Account WhatsApp Desktop Client",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
   },
+  "build": {
+  "appId": "com.yohanes.whatsapp",
+  "productName": "Multi-Account WhatsApp Desktop Client",
+  "copyright": "Copyright © 2025 yohanesoktanio",
+  "files": [
+    "build/**/*",
+    "dist/**/*",
+    "assets/**/*",
+    "static/**/*",
+    "node_modules/**/*",
+    "package.json"
+  ],
+  "directories": {
+    "buildResources": "assets",
+    "output": "release"
+  },
+  "win": {
+    "target": "nsis",
+    "icon": "assets/icon.ico"
+  },
+  "linux": {
+    "target": "AppImage",
+    "icon": "assets/icon.png",
+    "category": "Utility"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  }
+}
+,
   "keywords": [],
-  "author": "",
+  "author": "Yohanes Oktanio",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^7.8.1",
@@ -20,7 +53,8 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron/fuses": "^1.8.0",
-    "electron": "^37.2.3"
+    "electron": "^37.2.3",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1"
