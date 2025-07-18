@@ -33,7 +33,8 @@
         "rpm"
       ],
       "icon": "assets/icon.png",
-      "category": "Utility"
+      "category": "Utility",
+      "maintainer": "Yohanes Oktanio <yohanesoktayt72@gmail.com>"
     },
     "nsis": {
       "oneClick": false,
@@ -41,7 +42,7 @@
     }
   },
   "keywords": [],
-  "author": "Yohanes Oktanio",
+  "author": "Yohanes Oktanio <yohanesoktayt72@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "electron": "^37.2.3",
