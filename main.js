@@ -15,7 +15,7 @@ function createWindow() {
     },
     icon: path.join(__dirname, 'assets','icon.png') 
   });
-  mainWindow.loadFile('./static/index.html');
+  mainWindow.loadFile(path.join(__dirname,'static/index.html'));
 }
 app.whenReady().then(createWindow);
 
