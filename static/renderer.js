@@ -1,27 +1,74 @@
-
-
 const accountList = document.getElementById('account-list');
 const webviewContainer = document.getElementById('webview-container');
 const addAccountBtn = document.getElementById('add-account-btn');
 
+
 let accounts = [];
 let activeAccountId = null;
 
-function minimize(){
+
+const sidebar = document.querySelector('.sidebar');
+const storageKey = 'profile';
+let load = JSON.parse(localStorage.getItem(storageKey)) || false;
+
+function updateDisplay(active) {
+    sidebar.style.display = active ? "flex" : "none";
+}
+updateDisplay(load);
+function toggleProfile() {
+    const now = JSON.parse(localStorage.getItem(storageKey)) || false;
+    const news = !now;
+    console.log("Status lama:", now, "-> Status baru:", news);
+    localStorage.setItem(storageKey, JSON.stringify(news));
+    updateDisplay(news);
+}
+
+function privacy_chats(){
+   const private = (localStorage.getItem('privacy') == "chats") ? "" : "chats"
+    localStorage.setItem('privacy',private)
+    window.location.reload()
+}
+function privacy_all(){
+   const private = (localStorage.getItem('privacy') == "all") ? "" : "all"
+    localStorage.setItem('privacy',private)
+    window.location.reload()
+
+}
+
+
+function actionTogle() {
+    const action = document.querySelector('#actionbtn')
+    if (action.style.display == "none") {
+        action.style.display = 'flex'
+    } else {
+        action.style.display = 'none'
+    }
+}
+
+function minimize() {
     window.api.minimize()
 }
-function maximize () {
+function maximize() {
     window.api.maximize()
 }
 
 function closeWindow() {
     window.api.close();
 }
+function developermode() {
+    alert("ctl + shift + i\nKetik sendiri bisa kan?")
+    window.api.toggleDevTools();
+}
+
+function about() {
+    alert('Develop by: Yohanes Oktanio\nGithub : yohanesokta')
+}
+
 
 function renderUI() {
 
     const mainButton = document.querySelectorAll('#btnMain')
-    
+    const privacy = localStorage.getItem('privacy')
     accountList.innerHTML = '';
     webviewContainer.innerHTML = '';
 
@@ -60,9 +107,20 @@ function renderUI() {
         webview.setAttribute('data-id', accountId);
         webview.setAttribute('partition', `persist:whatsapp-account-${accountId}`);
         webview.setAttribute('src', 'https://web.whatsapp.com')
-        webview.setAttribute('useragent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36');
+        webview.setAttribute('useragent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36');
+        if (privacy == "all"){
+            document.getElementById('privacy_all').style.color = 'green'
+
+          webview.setAttribute('preload', 'webview_preloader.all.js');
+        } else if (privacy == "chats") {
+            document.getElementById('privacy_chats').style.color = 'green'
+
+          webview.setAttribute('preload', 'webview_preloader.chats.js');
+
+        }
         webview.classList.add('hidden');
         webviewContainer.appendChild(webview);
+
     });
 
 

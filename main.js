@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const { ipcMain } = require('electron');
+const EXT_PATH = path.join(__dirname,'stylus');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -13,7 +14,7 @@ function createWindow() {
       contextIsolation: true,
       webviewTag: true, 
     },
-    icon: path.join(__dirname, 'assets','icon.png') 
+    icon: path.join(__dirname, 'assets/icon.png') 
   });
   mainWindow.loadFile(path.join(__dirname,'static/index.html'));
 }
@@ -54,4 +55,13 @@ ipcMain.on('close-window', () => {
     if (win) {
         win.close();
     }
+});
+
+ipcMain.on('toggle-dev-tools', (event) => {
+  const webContents = event.sender;
+  const win = BrowserWindow.fromWebContents(webContents);
+  console.log("OKA")
+  if (win) {
+    win.webContents.toggleDevTools();
+  }
 });
