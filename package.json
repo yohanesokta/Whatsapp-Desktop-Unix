@@ -1,7 +1,7 @@
 {
   "name": "WhatsApp_Desktop_Unix",
   "version": "1.0.1",
-  "description": "Multi-Account WhatsApp Desktop Client",
+  "description": "WhatsApp Desktop Client Unix",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
