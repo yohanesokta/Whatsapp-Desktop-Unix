@@ -27,7 +27,11 @@
       "icon": "assets/icon.ico"
     },
     "linux": {
-      "target": "AppImage",
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
       "icon": "assets/icon.png",
       "category": "Utility"
     },
