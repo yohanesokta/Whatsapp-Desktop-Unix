@@ -1,21 +1,18 @@
-name: Build & Release
+name: Auto Release Latest Electron App
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - main
 
 jobs:
   release:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
 
     steps:
-      - name: Check out Git repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -26,10 +23,27 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build/release Electron app
+      - name: Get latest version tag
+        id: get_tag
+        run: |
+          TAG=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+          echo "Latest tag is $TAG"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Build & Release with Electron Builder
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Ensure GitHub Release exists
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_tag.outputs.tag }}
+          name: Release ${{ steps.get_tag.outputs.tag }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
