@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Whatsapp Desktop Unix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="list-btn">
+            <button id="btnMain" onclick="minimize()"></button>
+            <button id="btnMain" onclick="maximize()"></button>
+            <button id="btnMain" onclick="closeWindow()"></button>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="main-content" id="webview-container">
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <button id="add-account-btn">+</button>
+        <div id="account-list">
+        </div>
+    </div>
+
+    <script src="./renderer.js"></script>
+</body>
+
+</html>
