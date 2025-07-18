@@ -10,7 +10,7 @@
   },
   "build": {
     "appId": "com.yohanes.whatsapp",
-    "productName": "Multi-Account WhatsApp Desktop Client",
+    "productName": "WhatsApp Desktop Unix",
     "copyright": "Copyright © 2025 yohanesoktanio",
     "files": [
       "main.js",
