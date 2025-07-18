@@ -15,6 +15,7 @@
   "productName": "Multi-Account WhatsApp Desktop Client",
   "copyright": "Copyright © 2025 yohanesoktanio",
   "files": [
+    "**/*",
     "build/**/*",
     "dist/**/*",
     "assets/**/*",
