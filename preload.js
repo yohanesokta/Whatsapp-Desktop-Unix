@@ -6,3 +6,4 @@ contextBridge.exposeInMainWorld('api', {
   close: () => ipcRenderer.send('close-window'),
   toggleDevTools: () => ipcRenderer.send('toggle-dev-tools')
 });
+
